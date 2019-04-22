@@ -27,6 +27,9 @@ alias apti='sudo apt install'
 apts() { apt-cache show "$@" | less; }
 aptq() { apt-cache search "$@" | less; }
 
+# git
+alias gitc='git clone'
+
 #moc
 alias mocp="mocp --theme=transparent-background"
 
