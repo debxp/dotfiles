@@ -11,6 +11,8 @@ set $sup        bindsym Mod4
 set $exe        exec --no-startup-id
 set $exe_always exec_always --no-startup-id
 
+set $primary_monitor 
+
 set $bin_path   ~/.local/bin
 
 set $ukey Up
@@ -29,6 +31,13 @@ focus_follows_mouse no
 workspace_auto_back_and_forth yes
 
 for_window [class="^.*"] title_format " ● %title"
+
+
+# monitor output #
+
+set $out_vga  output VGA-1
+set $out_hdmi output HDMI-1
+set $out_note output LVDS-1
 
 
 # session control #
@@ -133,16 +142,16 @@ $sup+Shift+0 move container to workspace $ws10
 
 # workspace output #
 
-workspace $ws1  output VGA-1
-workspace $ws2  output VGA-1
-workspace $ws3  output VGA-1
-workspace $ws4  output VGA-1
-workspace $ws5  output VGA-1
-workspace $ws6  output VGA-1
-workspace $ws7  output VGA-1
-workspace $ws8  output VGA-1
-workspace $ws9  output VGA-1
-workspace $ws10 output LVDS-1
+workspace $ws1  $out_vga
+workspace $ws2  $out_vga
+workspace $ws3  $out_vga
+workspace $ws4  $out_vga
+workspace $ws5  $out_vga
+workspace $ws6  $out_vga
+workspace $ws7  $out_vga
+workspace $ws8  $out_vga
+workspace $ws9  $out_vga
+workspace $ws10 $out_note
 
 
 # workspace cycling #
@@ -181,7 +190,7 @@ client.urgent           $dark      $red       $dark     $dark
 # status bar #
 
 bar {
-        output VGA-1
+        $out_vga
         position bottom
         tray_padding 5
         
