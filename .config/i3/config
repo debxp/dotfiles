@@ -11,8 +11,6 @@ set $sup        bindsym Mod4
 set $exe        exec --no-startup-id
 set $exe_always exec_always --no-startup-id
 
-set $primary_monitor 
-
 set $bin_path   ~/.local/bin
 
 set $ukey Up
