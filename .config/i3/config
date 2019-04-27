@@ -1,0 +1,265 @@
+# 
+# ~/.config/i3/config
+# version: 2019-04-26
+# 
+
+# init #
+
+set $mod Mod4
+
+set $sup        bindsym Mod4
+set $exe        exec --no-startup-id
+set $exe_always exec_always --no-startup-id
+
+set $bin_path   ~/.local/bin
+
+set $ukey Up
+set $dkey Down
+set $lkey Left
+set $rkey Right
+
+font pango:Open Sans Semibold 10
+
+floating_modifier Mod1
+
+default_border pixel 4
+
+focus_follows_mouse no
+
+workspace_auto_back_and_forth yes
+
+for_window [class="^.*"] title_format " ● %title"
+
+
+# session control #
+
+$sup+Shift+c   reload
+$sup+Shift+r   restart
+$sup+Shift+F12 $exe $bin_path/rofi-i3logout
+
+
+# close window #
+
+$sup+Shift+q kill
+
+
+# terminal #
+
+$sup+Return $exe i3-sensible-terminal
+
+
+# border modes #
+
+$sup+b border toggle
+
+
+# focus #
+
+$sup+$lkey focus left
+$sup+$dkey focus down
+$sup+$ukey focus up
+$sup+$rkey focus right
+
+
+# layout switching #
+
+$sup+slash     layout toggle splitv splith
+$sup+F11       fullscreen toggle
+
+
+# floating #
+
+$sup+period    floating toggle
+$sup+semicolon focus mode_toggle
+
+
+# moving #
+
+$sup+Shift+$lkey move left
+$sup+Shift+$dkey move down
+$sup+Shift+$ukey move up
+$sup+Shift+$rkey move right
+
+
+# resizing #
+
+$sup+Control $rkey resize grow   width  2 px or 2 ppt
+$sup+Control $lkey resize shrink width  2 px or 2 ppt
+$sup+Control $ukey resize grow   height 2 px or 2 ppt
+$sup+Control $dkey resize shrink height 2 px or 2 ppt
+
+
+# workspace labels #
+
+set $ws1 "1: Main"
+set $ws2 "2: Web"
+set $ws3 "3: Terminal"
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: Music"
+set $ws8 "8: Chat"
+set $ws9 "9: E-mail"
+set $ws10 "10: Notebook"
+
+
+# workspace switching #
+
+$sup+1 workspace $ws1
+$sup+2 workspace $ws2
+$sup+3 workspace $ws3
+$sup+4 workspace $ws4
+$sup+5 workspace $ws5
+$sup+6 workspace $ws6
+$sup+7 workspace $ws7
+$sup+8 workspace $ws8
+$sup+9 workspace $ws9
+$sup+0 workspace $ws10
+
+
+# moving to workspace #
+
+$sup+Shift+1 move container to workspace $ws1
+$sup+Shift+2 move container to workspace $ws2
+$sup+Shift+3 move container to workspace $ws3
+$sup+Shift+4 move container to workspace $ws4
+$sup+Shift+5 move container to workspace $ws5
+$sup+Shift+6 move container to workspace $ws6
+$sup+Shift+7 move container to workspace $ws7
+$sup+Shift+8 move container to workspace $ws8
+$sup+Shift+9 move container to workspace $ws9
+$sup+Shift+0 move container to workspace $ws10
+
+
+# workspace output #
+
+workspace $ws1  output VGA-1
+workspace $ws2  output VGA-1
+workspace $ws3  output VGA-1
+workspace $ws4  output VGA-1
+workspace $ws5  output VGA-1
+workspace $ws6  output VGA-1
+workspace $ws7  output VGA-1
+workspace $ws8  output VGA-1
+workspace $ws9  output VGA-1
+workspace $ws10 output LVDS-1
+
+
+# workspace cycling #
+
+bindsym Ctrl+Mod1+Right workspace next
+bindsym Ctrl+Mod1+Left  workspace prev
+
+
+# urgent workspace #
+
+$sup+u [urgent=latest] focus
+
+
+# colors #
+
+set $darker   #080910
+set $dark     #181920
+set $black    #2F343F
+set $darkgray #484950
+set $gray     #9899a0
+set $white    #E5E9F0
+set $red      #BF616A
+set $orange   #E59847
+set $green    #A3BE8C
+set $cyan     #88C0D0
+set $blue     #81A1C1
+set $purple   #B48EAD
+
+# class                 border     backgr     text      indicator
+client.focused          $black     $black     $cyan     $blue
+client.unfocused        $dark      $dark      $gray     $dark
+client.focused_inactive $dark      $dark      $gray     $dark
+client.urgent           $dark      $red       $dark     $dark
+
+
+# status bar #
+
+bar {
+        output VGA-1
+        position bottom
+        tray_padding 5
+        
+        status_command i3blocks
+        
+        # bar font
+        font pango:Open Sans Semibold 10
+        
+        colors {
+        
+            statusline    $white
+            background    $dark
+        
+            #                   border     backgr    text
+            focused_workspace   $dark      $dark     $cyan
+            active_workspace    $dark      $dark     $darkgray
+            inactive_workspace  $dark      $dark     $darkgray
+            urgent_workspace    $red       $red      $dark
+        }
+}
+
+
+# assignments #
+
+assign [class="Whatsie"]         $ws8
+assign [class="TelegramDesktop"] $ws8
+assign [class="Thunderbird"]     $ws9
+
+
+# floating #
+
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nitrogen"] floating enable
+
+
+# menus #
+
+$sup+space $exe $bin_path/rofi-launcher
+$sup+w     $exe $bin_path/rofi-websearch
+$sup+p     $exe $bin_path/rofi-places
+$sup+r     $exe rofi -show run
+
+
+# screenshots #
+
+mode "PrintScr" {
+    # Change to 'scrot' script later...
+    bindsym f $exe kazam -f; mode "default"
+    bindsym s $exe kazam -s; mode "default"
+    bindsym w $exe kazam -w; mode "default"
+    bindsym a $exe kazam -a; mode "default"
+
+    bindsym Escape mode "default"
+}
+bindsym Print mode "PrintScr"
+
+
+# volume control and status #
+
+bindsym XF86AudioRaiseVolume $exe pactl set-sink-volume 0 +5% && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume $exe pactl set-sink-volume 0 -5% && pkill -SIGRTMIN+10 i3blocks
+bindsym XF86AudioMute        $exe pactl set-sink-mute 0 toggle && pkill -SIGRTMIN+10 i3blocks
+
+
+# keylock status #
+
+bindsym --release Caps_Lock $exe pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  $exe pkill -SIGRTMIN+11 i3blocks
+
+
+# session startup #
+
+$exe ~/.screenlayout/i3-default.sh
+$exe_always compton -cCGfFz -o 0.38 -O 0.025 -I 0.025 -t -2 -l -2 -r 3 -D 2 --shadow-exclude "class_g = 'Firefox' && argb" -b --backend glx --vsync opengl-swc
+$exe nitrogen --restore
+$exe xset b off
+$exe xfce4-power-manager
+$exe /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+$exe nm-applet
+$exe thunderbird
+
