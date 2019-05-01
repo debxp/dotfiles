@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+modis=" \
+Locais:$HOME/.local/bin/rofi-modi-find, \
+Buscar na web:$HOME/.local/bin/rofi-modi-websearch \
+"
+
+rofi -modi "drun,run,$modis,window" \
+     -show drun -sort -i -disable-history -drun-match-fields "name" -sidebar-mode
+
+
+exit 0
