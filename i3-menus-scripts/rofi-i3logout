@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-theme="$HOME/.config/rofi/themes/debxp-dark-center.rasi"
-
 opt1="Logout\nReiniciar\nDesligar"
 opt2="Sim\nNão"
 
 
 ask() {
-    answer="$( echo -e $1 | rofi -dmenu -p "$2" -theme $theme )"
+    answer="$( echo -e $1 | rofi -dmenu -p "$2" )"
 }
 
 ask "$opt1" "Encerrar sessão"
