@@ -30,7 +30,11 @@ aptq() { apt-cache search "$@" | less; }
 # git
 alias gitc='git clone'
 
-#moc
+# youtube-dl
+alias ytv='youtube-dl -ic --geo-bypass'
+alias yta='youtube-dl -xic --geo-bypass'
+
+# moc
 alias mocp="mocp --theme=transparent-background"
 
 # create .tar.gz 
