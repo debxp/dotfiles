@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+opt1="Logout\nRestart\nShutdown"
+opt2="Yes\nNo, please!"
+
+
+ask() {
+    answer="$( echo -e $1 | rofi -dmenu -p "$2" )"
+}
+
+ask "$opt1" "Quit"
+
+case $answer in
+    "Logout")
+        ask "$opt2" "Exit i3wm?"
+        if [[ $answer == "Yes" ]]; then
+            i3-msg exit
+        fi
+        exit 0
+        ;;
+    "Restart")
+        ask "$opt2" "Restart system?"
+        if [[ $answer == "Yes" ]]; then
+            systemctl reboot
+        fi
+        exit 0
+        ;;
+    "Shutdown")
+        ask "$opt2" "Shutdown the computer?"
+        if [[ $answer == "Yes" ]]; then
+            systemctl poweroff
+        fi
+        exit 0
+        ;;
+esac
+
+exit 0
