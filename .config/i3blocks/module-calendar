@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+case "$BLOCK_BUTTON" in
+  1|2|3) 
+    i3-msg 'exec gsimplecal' > /dev/null ;;
+esac
+echo "$(date '+%d %b, %Y - %H:%M')"
