@@ -12,7 +12,6 @@
 #
 #   - mansearch-dmenu        : search and open a manual (man) page
 #   - ssgen-dmenu            : create / open scripts
-#   - notes-dmenu            : create / open notes
 #  
 #   - launcher-neomutt       : launch / focus neomutt
 #   - launcher-thunderbird   : launch / focus thunderbird
@@ -25,14 +24,14 @@
 set $mod Mod4
 
 # bindsym shortener
-set $sup bindsym Mod4
+set $sup        bindsym Mod4
 
 # exec shortener
 set $exe        exec --no-startup-id
 set $exe_always exec_always --no-startup-id
 
 # user local bin path (usually '~/bin' or '~/.local/bin')
-set $bin_path ~/.local/bin
+set $bin_path   ~/.local/bin
 
 # direction keys
 set $ukey Up
@@ -57,8 +56,8 @@ set $default_mail ~/.local/bin/launcher-thunderbird
 
 # session control ------------------------------------------------------------ #
 
-$sup+Shift+c reload
-$sup+Shift+r restart
+$sup+Shift+c   reload
+$sup+Shift+r   restart
 
 $sup+Shift+F12 $exe $bin_path/rofi-i3logout
 
@@ -68,20 +67,12 @@ $sup+Return $exe i3-sensible-terminal
 
 # focus ---------------------------------------------------------------------- #
 
-focus_follows_mouse yes
-focus_wrapping no
+focus_follows_mouse no
 
 $sup+$lkey focus left
 $sup+$dkey focus down
 $sup+$ukey focus up
 $sup+$rkey focus right
-
-$sup+Prior focus parent
-$sup+Next  focus child
-
-# splitting ------------------------------------------------------------------- #
-
-$sup+semicolon split toggle
 
 # layout switching ----------------------------------------------------------- #
 
@@ -92,8 +83,8 @@ $sup+F11   fullscreen toggle
 
 floating_modifier Mod1
 
-$sup+period floating toggle
-$sup+comma  focus mode_toggle
+$sup+period    floating toggle
+$sup+semicolon focus mode_toggle
 
 # moving --------------------------------------------------------------------- #
 
@@ -164,6 +155,7 @@ set $ico_volume   <span font='Font Awesome'>&#xf028;</span>
 set $ico_whatsapp <span font='Font Awesome'>&#xf232;</span>
 set $ico_window   <span font='Font Awesome'>&#xf2d0;</span>
 
+
 # workspace labels ----------------------------------------------------------- #
 
 set $ws1  "1: "
@@ -177,6 +169,7 @@ set $ws8  "8: "
 set $ws9  "9: <span font='Font Awesome'>&#xf003;</span>"
 set $ws10 "10: "
 
+
 # workspace output -- remind: check panel output! ---------------------------- #
 
 workspace $ws1  $out_pri
@@ -189,6 +182,7 @@ workspace $ws7  $out_pri
 workspace $ws8  $out_pri
 workspace $ws9  $out_pri
 workspace $ws10 $out_sec
+
 
 # workspace switching -------------------------------------------------------- #
 
@@ -205,6 +199,7 @@ $sup+8 workspace $ws8
 $sup+9 workspace $ws9
 $sup+0 workspace $ws10
 
+
 # moving to workspace -------------------------------------------------------- #
 
 $sup+Shift+1 move container to workspace $ws1;  workspace $ws1
@@ -218,14 +213,17 @@ $sup+Shift+8 move container to workspace $ws8;  workspace $ws8
 $sup+Shift+9 move container to workspace $ws9;  workspace $ws9
 $sup+Shift+0 move container to workspace $ws10; workspace $ws10
 
+
 # workspace cycling ---------------------------------------------------------- #
 
 bindsym Ctrl+Mod1+Right workspace next
 bindsym Ctrl+Mod1+Left  workspace prev
 
+
 # urgent workspace ----------------------------------------------------------- #
 
 $sup+u [urgent=latest] focus
+
 
 # chrome apps instances ------------------------------------------------------ #
 
@@ -235,11 +233,12 @@ set $drumbit_instance [instance="crx_emkaemcghilafekbnjdpienhfkmhbjfn"]
 set $auralis_instance [instance="crx_kfldlpicolfknfifcpiipbgklinnenne"]
 set $scales_instance  [instance="crx_kgmlapedajmlebhhipilgaphlhklkjlk"]
 
+
 # windows -------------------------------------------------------------------- #
 
 $sup+Shift+q kill
 
-default_border pixel 2
+default_border normal 1
 $sup+b border toggle
 
 # floating enable shortener
@@ -274,7 +273,6 @@ for_window [class="Xfce4-terminal"]  title_format "  $ico_terminal  %title"
 
 for_window [title="^NeoMutt Mail$"]              title_format "  $ico_email  %title"
 for_window [title="^Mansearch - Manual Viewer$"] title_format "  $ico_document  %title" floating enable
-for_window [title="^SimplerNote$"]               title_format "  $ico_editor  %title" floating enable
 
 # workspace assignments ------------------------------------------------------ #
 
@@ -299,6 +297,8 @@ assign [class="Thunderbird"]        $ws9
 assign [class="Firefox"]            $ws10
 
 # colors --------------------------------------------------------------------- #
+
+# TODO: make a script to change color schemes and reload config...
 
 set $darker   #080910
 set $dark     #181920
@@ -384,9 +384,6 @@ $sup+F4    $exe $bin_path/rofi-websearch
 
 # ssgen - script to open / create scripts...
 $sup+F5 $exe $bin_path/ssgen-dmenu
-
-# notes-dmenu - script to open / create notes...
-$sup+F6 $exe $bin_path/notes-dmenu
 
 # rofi Alt+Tab to show windows list...
 bindsym Mod1+Tab $exe rofi -show window
