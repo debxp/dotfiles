@@ -10,9 +10,12 @@ case $BLOCK_BUTTON in
 esac
 
 new_mail="$(du -a ~/.local/share/mail/*/*/new/* 2>/dev/null | sed -n '$=')"
+
 if [[ -z "$new_mail" ]]; then
-    icon="<span font='Font Awesome' color='#3B4252'></span>"
+    color="#3B4252"
 else
-    icon="<span font='Font Awesome' color='#BF616A'></span>"
+    color="#BF616A"
 fi
-echo " $icon <span color='#BF616A'>$new_mail</span>$(cat /tmp/imapsyncicon_$USER 2>/dev/null)"
+icon="<span font='Font Awesome'>&#xf003;</span>"
+
+echo " <span color='$color'>$icon $new_mail</span>$(cat /tmp/imapsyncicon_$USER 2>/dev/null)"
