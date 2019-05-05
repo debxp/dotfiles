@@ -1,10 +1,7 @@
 # i3blocks config file
-#
-# Please see man i3blocks for a complete reference!
-# The man page is also hosted at http://vivien.github.io/i3blocks
-#
+
 # List of valid properties:
-#
+
 # align
 # color
 # command
@@ -21,28 +18,37 @@
 # urgent
 
 # Global properties
-#
-# The top properties below are applied to every block, but can be overridden.
-# Each block command defaults to the script name to avoid boilerplate.
+
 command=/usr/share/i3blocks/$BLOCK_NAME
 separator_block_width=20
-markup=none
+markup=pango
 color=#88C0D0
 
-# Key indicators
+# modules
+
 [keyindicator]
 instance=CAPS
 interval=once
 signal=11
 command=~/.config/i3blocks/keyindicator
 
-# Volume indicator
+[mailbox]
+interval=900
+command=~/.config/i3blocks/mailbox
+signal=12
+
+# [module-wifi]
+# interval=30
+# instance=wlp2s0
+# command=~/.config/i3blocks/module-wifi
+
 [volume]
-label=Vol: 
 instance=Master
 interval=once
+command=~/.config/i3blocks/module-volume
 signal=10
 
 [module-calendar]
 interval=60
 command=~/.config/i3blocks/module-calendar
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# i3blocks mail module.
+# Displays number of unread mail and an loading icon if updating.
+# When clicked, brings up `neomutt`.
+
+case $BLOCK_BUTTON in
+    1) i3-msg 'exec ~/.local/bin/launcher-neomutt' > /dev/null ;;
+    3) setsid mailsync >/dev/null & ;;
+esac
+
+new_mail="$(du -a ~/.local/share/mail/*/*/new/* 2>/dev/null | sed -n '$=')"
+if [[ -z "$new_mail" ]]; then
+    icon="<span font='Font Awesome' color='#3B4252'></span>"
+else
+    icon="<span font='Font Awesome' color='#BF616A'></span>"
+fi
+echo " $icon <span color='#BF616A'>$new_mail</span>$(cat /tmp/imapsyncicon_$USER 2>/dev/null)"
